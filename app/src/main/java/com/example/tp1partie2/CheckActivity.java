@@ -13,8 +13,11 @@ public class CheckActivity extends AppCompatActivity {
 
     String numberChallenge1;
     String numberChallenge2;
+
     TextView textViewChallenge1;
     TextView textViewChallenge2;
+
+    EditText inputResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +46,19 @@ public class CheckActivity extends AppCompatActivity {
     }
 
     public void finish(View view){
-        this.onBackPressed();
+        Intent intent=new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        setResult(79,intent);
+        CheckActivity.super.onBackPressed();
         Toast.makeText(getApplicationContext(),"l’opération a été annulée",Toast.LENGTH_SHORT).show();
     }
 
     public void onClickOK(View view){
-        EditText editTextSum;
-
-        Intent myIntent = new Intent(this, MainActivity.class);
-        editTextSum = (EditText) findViewById(R.id.editTextNumberSum);
-
-        myIntent.putExtra("Sum", String.valueOf(editTextSum.getText()));
-
-        startActivity(myIntent);
+        Intent intent=new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        inputResult = (EditText) findViewById(R.id.editTextNumberSum);
+        intent.putExtra("SUM", String.valueOf(inputResult.getText()));
+        setResult(78,intent);
+        CheckActivity.super.onBackPressed();
     }
 }

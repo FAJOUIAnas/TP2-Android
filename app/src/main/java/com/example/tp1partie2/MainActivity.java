@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -22,6 +23,14 @@ public class MainActivity extends AppCompatActivity {
 
     private static boolean result=false;
     private int CALL_Perm;
+
+    EditText inputChallenge1;
+    EditText inputChallenge2;
+    String sum;
+
+    int numChallenge1;
+    int numChallenge2;
+    int sumInt;
 
     ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -44,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-    String numberSum;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,24 +61,12 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
-                numberSum= null;
+                sum = null;
             } else {
-                numberSum= extras.getString("Sum");
+                sum= extras.getString("SUM");
             }
         } else {
-            numberSum= (String) savedInstanceState.getSerializable("Sum");
-        }
-
-        if (numberSum != null) {
-            if (Integer.parseInt(numberSum) ==
-                    (Integer.parseInt(editTextChallenge1.getText().toString())
-                    + Integer.parseInt(editTextChallenge1.getText().toString()))) {
-                Log.i("SUM", numberSum + " : ici sum");
-                searchUrl();
-            } else {
-                numberSum = null;
-                Toast.makeText(getApplicationContext(), "Somme incorrecte", Toast.LENGTH_SHORT).show();
-            }
+            sum = (String) savedInstanceState.getSerializable("SUM");
         }
     }
 
@@ -91,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void searchUrl(){
-        Log.i("SUdddM", "idddci sum");
         EditText url = findViewById(R.id.edtTxtUrl);
         String urlName = url.getText().toString();
         if (urlName.isEmpty()) {
@@ -110,18 +105,52 @@ public class MainActivity extends AppCompatActivity {
         startActivity(myIntent);
     }
 
-    static EditText editTextChallenge1;
-    static EditText editTextChallenge2;
-
     public void checkActivity(View view) {
 
-        Intent myIntent = new Intent(this, CheckActivity.class);
-        editTextChallenge1 = (EditText) findViewById(R.id.editTextNumberChallenge1);
-        editTextChallenge2 = (EditText) findViewById(R.id.editTextNumberChallenge2);
+        Intent intent = new Intent(this, CheckActivity.class);
 
-        myIntent.putExtra("Num1", String.valueOf(editTextChallenge1.getText()));
-        myIntent.putExtra("Num2", String.valueOf(editTextChallenge2.getText()));
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        inputChallenge1 = findViewById(R.id.editTextNumberChallenge1);
+        inputChallenge2 = findViewById(R.id.editTextNumberChallenge2);
 
-        startActivity(myIntent);
+        intent.putExtra("Num1", String.valueOf(inputChallenge1.getText()));
+        intent.putExtra("Num2", String.valueOf(inputChallenge2.getText()));
+
+        if (inputChallenge1.getText().toString().matches("") || inputChallenge2.getText().toString().matches("")) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Tous les champs doivent etre remplis !",
+                    Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
+            someActivityResultLauncher.launch(intent);
+            numChallenge1 = Integer.parseInt(String.valueOf(inputChallenge1.getText()));
+            numChallenge2 = Integer.parseInt(String.valueOf(inputChallenge2.getText()));
+        }
     }
+
+    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+        new ActivityResultContracts.StartActivityForResult(),
+        new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode() == 78) {
+                    // There are no request codes
+                    Intent data = result.getData();
+                    if( data != null){
+                        sum = data.getStringExtra("SUM");
+
+                        sumInt= Integer.parseInt(sum);
+
+                        if(numChallenge1+numChallenge2 == sumInt){
+                            searchUrl();
+                        }
+                    }
+                }else {
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "l’opération a été annulée",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+        });
 }
