@@ -71,7 +71,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void callNumber(View view){
-        Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
+//        Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent myIntent = new Intent();
+        myIntent.setAction("login.ACTION");
         activityLauncher.launch(myIntent);
     }
 
