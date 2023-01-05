@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
             });
 
     String numberSum;
-    TextView textViewSum;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,9 +61,17 @@ public class MainActivity extends AppCompatActivity {
             numberSum= (String) savedInstanceState.getSerializable("Sum");
         }
 
-        /*textViewChallenge1 = (TextView) findViewById(R.id.textViewChallenge1);
-
-        textViewChallenge1.setText(numberChallenge1);*/
+        if (numberSum != null) {
+            if (Integer.parseInt(numberSum) ==
+                    (Integer.parseInt(editTextChallenge1.getText().toString())
+                    + Integer.parseInt(editTextChallenge1.getText().toString()))) {
+                Log.i("SUM", numberSum + " : ici sum");
+                searchUrl();
+            } else {
+                numberSum = null;
+                Toast.makeText(getApplicationContext(), "Somme incorrecte", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     public void callNumber(View view){
@@ -84,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void searchUrl(View view){
+    public void searchUrl(){
+        Log.i("SUdddM", "idddci sum");
         EditText url = findViewById(R.id.edtTxtUrl);
         String urlName = url.getText().toString();
         if (urlName.isEmpty()) {
@@ -103,9 +110,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(myIntent);
     }
 
-    public void checkActivity(View view){
-        EditText editTextChallenge1;
-        EditText editTextChallenge2;
+    static EditText editTextChallenge1;
+    static EditText editTextChallenge2;
+
+    public void checkActivity(View view) {
 
         Intent myIntent = new Intent(this, CheckActivity.class);
         editTextChallenge1 = (EditText) findViewById(R.id.editTextNumberChallenge1);
