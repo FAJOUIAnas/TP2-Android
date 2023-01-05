@@ -6,6 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <EditText
+        android:id="@+id/editTxtPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        android:ems="10"
+        android:hint="phone number"
+        android:importantForAutofill="no"
+        android:inputType="phone"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.209"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btnPerso"
+        android:layout_width="50dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="176dp"
+        android:onClick="persoActivity"
+        android:src="@android:drawable/ic_menu_compass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.182"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBrowser"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <EditText
+        android:id="@+id/editTextNumberChallenge2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="40dp"
+        android:ems="10"
+        android:hint="entrer un entier"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumberChallenge1" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Challenge 1 :"
+        app:layout_constraintEnd_toStartOf="@+id/editTextNumberChallenge1"
+        app:layout_constraintHorizontal_bias="0.609"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBrowser" />
+
+    <EditText
+        android:id="@+id/editTextNumberChallenge1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:ems="10"
+        android:hint="entrer un entier"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtUrl" />
+
     <ImageButton
         android:id="@+id/btnImgPhone"
         android:layout_width="wrap_content"
@@ -15,48 +79,19 @@
         android:onClick="callNumber"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/editTxtPhone"
-        app:layout_constraintHorizontal_bias="0.686"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.209"
         app:srcCompat="@android:drawable/stat_sys_phone_call"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,ImageContrastCheck"
         tools:srcCompat="@android:drawable/stat_sys_phone_call" />
 
     <EditText
-        android:id="@+id/editTxtPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
-        android:ems="10"
-        android:hint="phone number"
-        android:importantForAutofill="no"
-        android:inputType="phone"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/btnBrowser"
-        android:layout_width="49dp"
-        android:layout_height="48dp"
-        android:onClick="searchUrl"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/edtTxtUrl"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnImgPhone"
-        app:layout_constraintVertical_bias="0.109"
-        app:srcCompat="@drawable/ic_launcher_foreground"
-        tools:ignore="ImageContrastCheck"
-        tools:srcCompat="@android:drawable/ic_menu_send" />
-
-    <EditText
         android:id="@+id/edtTxtUrl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
+        android:layout_marginEnd="40dp"
         android:ems="10"
         android:hint="url"
         android:inputType="textPersonName"
@@ -64,28 +99,34 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTxtPhone"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.063" />
 
-    <ImageButton
-        android:id="@+id/btnPerso"
-        android:layout_width="50dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="160dp"
-        android:onClick="persoActivity"
-        android:src="@android:drawable/ic_menu_compass"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.193"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBrowser"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <EditText
-        android:id="@+id/editTextNumber"
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="502dp" />
+        android:layout_marginTop="44dp"
+        android:text="Challenge 2 :"
+        app:layout_constraintBottom_toTopOf="@+id/btnPerso"
+        app:layout_constraintEnd_toStartOf="@+id/editTextNumberChallenge2"
+        app:layout_constraintHorizontal_bias="0.609"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.304" />
+
+    <ImageButton
+        android:id="@+id/btnBrowser"
+        android:layout_width="49dp"
+        android:layout_height="48dp"
+        android:onClick="checkActivity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/edtTxtUrl"
+        app:layout_constraintHorizontal_bias="0.584"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnImgPhone"
+        app:layout_constraintVertical_bias="0.065"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        tools:ignore="ImageContrastCheck"
+        tools:srcCompat="@android:drawable/ic_menu_send" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

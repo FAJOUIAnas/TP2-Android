@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,10 +44,28 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+    String numberSum;
+    TextView textViewSum;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                numberSum= null;
+            } else {
+                numberSum= extras.getString("Sum");
+            }
+        } else {
+            numberSum= (String) savedInstanceState.getSerializable("Sum");
+        }
+
+        /*textViewChallenge1 = (TextView) findViewById(R.id.textViewChallenge1);
+
+        textViewChallenge1.setText(numberChallenge1);*/
     }
 
     public void callNumber(View view){
@@ -81,6 +100,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void persoActivity(View view){
         Intent myIntent = new Intent(this, PersoActivity.class);
+        startActivity(myIntent);
+    }
+
+    public void checkActivity(View view){
+        EditText editTextChallenge1;
+        EditText editTextChallenge2;
+
+        Intent myIntent = new Intent(this, CheckActivity.class);
+        editTextChallenge1 = (EditText) findViewById(R.id.editTextNumberChallenge1);
+        editTextChallenge2 = (EditText) findViewById(R.id.editTextNumberChallenge2);
+
+        myIntent.putExtra("Num1", String.valueOf(editTextChallenge1.getText()));
+        myIntent.putExtra("Num2", String.valueOf(editTextChallenge2.getText()));
+
         startActivity(myIntent);
     }
 }
